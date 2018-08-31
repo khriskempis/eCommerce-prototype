@@ -1,4 +1,11 @@
 language: node_js
 node_js: node
-services: 
-  - mongodb
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: RFFot10s9MYwIDrnoeHdokaJlvAfEC/cxIU2l3OSn7WJGCt2Ge3qBvPBIe+51zwjrVyL3W95QjpAGDFtLQDtBLJt6WzZ2is0r1LVSUUMEtEd79W2HJHXWYiXXAZNI5KzmX//mZdcEI6dY3mgxufYGMcI7VeBuhFQmjZLImAmAD8duCHkAAuOja2gk8bQK1i1Q1q1LRXs70eoBXl/5StDCY1fc0q3o8Sl+wr9c1s5134NpXcPb08YLem75UnwsN22qa6t/AoMw/yP/+SGYI9k4OpiCu4fbu5ITVhsIcFM+MuE/tQ/00MxBI4Habf37A4odTUah6BP/1xT/EbhdWVfslXI3tJRzagpsvKqqfIsRNy7eP+CeBHyQv/FOIP0zIn04jIkUUx6zEtsTHRPmfJvSQKzbkwEmLS9f5KU313jFvP8CyzJbTaFACRLNOwmWldGSQRSZru6tZA0Ar4wfhQNsVOcjmA0IGHl5WMp2g58x/X3Rzc5C9XdGx4s0D4KILifqsmw5GBWBD2adsGWZF3AOwyigsxKzU+bPuFhTGj/JQY1vTooCKt+MIpAqOMR6IRli4FWfmnbBp4tz9W5ZTnStkRWvxSFYC/3aoow8sUbj4Dd3+U13Z2l1I8mlG/YDRquH0fV90JsCkYk/i4lGYjLOJTOPR9/TNNCMbm8V9VqnoA=
+  app: https://frozen-cove-46991.herokuapp.com/
+  on:
+    repo: khriskempis/eCommerce-prototype
