@@ -2,17 +2,20 @@
 
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema()
+const Schema = mongoose.Schema;
+
+const imageSchema = Schema({ image_url: 'string' })
 
 const ItemSchema = Schema({
 	name: { type: String, required: true },
-	description: { type: String },
+	description: String,
 	qty: { type: Number, default: 1 },
-	cost: { type: Number },
+	cost: Number,
 	price: { 
 		regular: { type: Number, required: true },
-		sale: { type: Number }
-	}
+		sale: Number
+	},
+	image_url: [ imageSchema ]
 });
 
 ItemSchema.methods.serialize = function() {
@@ -22,9 +25,12 @@ ItemSchema.methods.serialize = function() {
 		qty: this.qty,
 		cost: this.cost,
 		price: {
-			regular: this.regular,
-			sale: this.sale
-		}
+			regular: this.price.regular,
+			sale: this.price.sale
+		},
+		image_url: [
+			{ url: this.image_url.url}
+		]
 	}
 };
 
