@@ -139,6 +139,66 @@ describe('/items endpoint', function () {
 		});
 	});
 
+	// describe('PUT request', function() {
+
+	// 	it('should update item', function() {
+
+	// 		const item1 = generateItem()
+
+	// 		const updateData = {
+	// 			name: "Updated Name",
+	// 			description: faker.lorem.sentence(),
+	// 			qty: 18
+	// 		}
+
+	// 		let item 
+	// 		return chai.request(app)
+	// 			.post('/items')
+	// 			.send(item1)
+	// 			.then(res => {
+
+	// 				item = res.body
+	// 				updateData._id = item._id
+
+	// 				return chai.request(app)
+	// 					.put(`/items/${item._id}`)
+	// 					.send(updateData);
+	// 			})
+	// 			.then(res => {
+	// 				expect(res).to.have.status(204);
+
+	// 				return Item.findById(updateData._id)
+	// 			})
+	// 			.then(_item => {
+	// 				console(_item);
+
+	// 			});
+	// 	});
+	// });
+
+	describe('DELETE request', function() {
+
+		it('should remove item from database', function() {
+
+			const item1 = generateItem();
+
+			return chai.request(app)
+				.post('/items')
+				.send(item1)
+				.then(res => {
+					item1._id = res.body._id;
+					return chai.request(app)
+						.delete(`/items/${item1._id}`)
+				})
+				.then(res => {
+					expect(res).to.have.status(204);
+					return Item.findById(item1._id);
+				})
+				.then(_res => {
+					expect(_res).to.be.null;
+				});
+		});
+	});
 
 
 });

@@ -50,8 +50,9 @@ router.get('/:id', (req, res) => {
 });
 
 // UPDATE item
-router.put('/:id', (req, res) => {loias
+router.put('/:id', (req, res) => {
 	//updated params
+	console.log(req.body)
 
 	//find fields to update in req.body
 	const updated = {};
@@ -59,7 +60,7 @@ router.put('/:id', (req, res) => {loias
 
 	updateableFields.forEach(field => {
 		if (field in req.body) {
-			updated[filed] = req.body[field]
+			updated[field] = req.body[field]
 		}
 	});
 
@@ -71,7 +72,19 @@ router.put('/:id', (req, res) => {loias
 	})
 	.catch(err => res.status(500).json({message: "Internal Server Error"}));
 
-
 });
+
+router.delete('/:id', (req, res) => {
+
+	Item.findByIdAndRemove(req.params.id)
+		.then(() => {
+			console.log(`Deleted blog post with id ${req.params.id}`);
+			res.status(204).end();
+		})
+		.catch(err => {
+			console.error(err)
+			res.status(500).json({message: "Internal Server Error"});
+		})
+})
 
 module.exports = { router }
