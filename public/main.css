@@ -1,7 +1,34 @@
-h1 {
-	color: green;
+* {
+	box-sizing: border-box;
 }
 
-p {
-	font-size: 40px; 
+body {
+	font-size: 16px;
+}
+
+ul {
+	list-style: none; 
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+
+
+
+/* === CONTENT DISPLAY === */
+
+.content-info {
+
+}
+
+.nav-links {
+
+}
+
+.inventory-display {
+
 }
