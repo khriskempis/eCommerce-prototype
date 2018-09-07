@@ -43,22 +43,18 @@ app.use('*', (req, res) => {
 	return res.status(404).json({ message: "Not Found"});
 });
 
-
-app.listen(process.env.PORT || 8080, () => {
-	console.log(`Your app is listening on port 8080`)
-});
-
 let server;
 
 function runServer(databaseUrl, port = PORT) {
 
 	return new Promise((resolve, reject) => {
-		mongoose.connect((databaseUrl, err) => {
+		mongoose.connect(databaseUrl, { useNewUrlParser: true }, err => {
 			if (err) {
 				return reject(err);
 			}
 			server = app.listen(port, () => {
 				console.log(`Your app is listening on port ${port}`);
+				resolve(); 
 			})
 				.on('error', err => {
 					mongoose.disconnect();
