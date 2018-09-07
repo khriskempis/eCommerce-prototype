@@ -66,12 +66,14 @@ function runServer(databaseUrl, port = PORT) {
 
 function closeServer() {
 	return mongoose.disconnect().then(() => {
-		console.log('Closing Server');
-		server.close(err => {
-			if (err) {
-				return reject(err); 
-			}
-			resolve();
+		return new Promise((resolve, reject) => {
+			console.log('Closing Server');
+			server.close(err => {
+				if (err) {
+					return reject(err); 
+				}
+				resolve();
+			});
 		});
 	});
 }
