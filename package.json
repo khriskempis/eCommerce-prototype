@@ -4,7 +4,7 @@
   "description": "eCommerce site for Champion Comics",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
