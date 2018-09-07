@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-const { app } = require('../server'); 
+const { app, runServer closeServer } = require('../server'); 
 
 
 const expect = chai.expect;
@@ -9,6 +9,14 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Server working', function() {
+
+	before(function() {
+		return runServer(TEST_DATABASE_URL);
+	});
+
+	after(function() {
+		return closeServer(); 
+	});
 
 	it('should serve static assets to client', function() {
 		return chai.request(app)
