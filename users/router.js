@@ -16,7 +16,7 @@ router.post('/', jsonParser, (req, res) => {
 	if (missingField) {
 		return res.status(422).json({
 			code: 422, 
-			reason 'ValidationError', 
+			reason: 'ValidationError', 
 			message: 'Missing Field',
 			location: missingField
 		});
@@ -121,4 +121,4 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 
-module.exports(router)
+module.exports = { router }

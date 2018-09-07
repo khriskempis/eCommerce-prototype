@@ -9,6 +9,8 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json(); 
 
-router.post('/', jsonParser, (req,res) => {
-	const requiredFields = 
-});
+// router.post('/', jsonParser, (req,res) => {
+// 	const requiredFields = 
+// });
+
+module.exports = { router };
