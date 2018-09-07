@@ -50,9 +50,9 @@ router.get('/:id', (req, res) => {
 });
 
 // UPDATE item
-router.put('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
 	//updated params
-	console.log(req.body)
+	// console.log(req.body)
 
 	//find fields to update in req.body
 	const updated = {};
@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
 	// returns modified document as opposed to the original document
 	Item.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }) 
 	.then(updatedPost => {
-		res.json(item.serialize()).status(204).end()
+		res.status(204).end()
 	})
 	.catch(err => res.status(500).json({message: "Internal Server Error"}));
 
