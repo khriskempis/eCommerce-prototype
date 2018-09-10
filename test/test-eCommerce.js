@@ -1,8 +1,13 @@
+'use strict';
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const mongoose = require('mongoose'); 
+
 
 const { app, runServer, closeServer } = require('../server'); 
 const { TEST_DATABASE_URL } = require('../config');
+
 
 
 const expect = chai.expect;
@@ -16,18 +21,15 @@ describe('Server working', function() {
 	});
 
 	after(function() {
-		return closeServer();
+		return closeServer(); 
 	});
 
-
-	describe("working server", function() {
-		it('should serve static assets to client', function() {
-			return chai.request(app)
-				.get('/')
-				.then((res) => {
-					expect(res).to.have.status(200); 
-				})
-		});
+	it('should serve static assets to client', function() {
+		return chai.request(app)
+			.get('/')
+			.then((res) => {
+				expect(res).to.have.status(200); 
+			})
 	});
 
 });

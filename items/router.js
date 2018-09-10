@@ -9,7 +9,6 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json(); 
 
-
 // CREATE a new item 
 router.post('/', jsonParser, (req,res) => {
 	const requiredFields = ["name", "description", "qty", "cost", "price", "image_url"];
@@ -87,4 +86,5 @@ router.delete('/:id', (req, res) => {
 		})
 })
 
-module.exports = { router }
+module.exports = { router };
+
