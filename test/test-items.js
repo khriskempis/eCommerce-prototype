@@ -33,15 +33,6 @@ function tearDownDb() {
 }
 
 describe('/items endpoint', function () {
-	// const name = 'Test Item';
-	// const description = 'this is a description of the Test Item';
-	// const qty = 13;
-	// const cost = 4;
-	// const price = {
-	// 	regular: 10,
-	// 	sale: 9
-	// };
-	// const image_url = [{ url: "https://url/string"}];
 
 	const newItem = generateItem(); 
 
@@ -139,43 +130,44 @@ describe('/items endpoint', function () {
 		});
 	});
 
-	// describe('PUT request', function() {
+	describe('PUT request', function() {
 
-	// 	it('should update item', function() {
+		it('should update item', function() {
 
-	// 		const item1 = generateItem()
+			const item1 = generateItem()
 
-	// 		const updateData = {
-	// 			name: "Updated Name",
-	// 			description: faker.lorem.sentence(),
-	// 			qty: 18
-	// 		}
+			const updateData = {
+				name: "Updated Name",
+				description: faker.lorem.sentence(),
+				qty: 18
+			}
 
-	// 		let item 
-	// 		return chai.request(app)
-	// 			.post('/items')
-	// 			.send(item1)
-	// 			.then(res => {
+			let item 
+			return chai.request(app)
+				.post('/items')
+				.send(item1)
+				.then(res => {
 
-	// 				item = res.body
-	// 				updateData._id = item._id
+					item = res.body
+					updateData._id = (item._id);
 
-	// 				return chai.request(app)
-	// 					.put(`/items/${item._id}`)
-	// 					.send(updateData);
-	// 			})
-	// 			.then(res => {
-	// 				expect(res).to.have.status(204);
+					return chai.request(app)
+						.put(`/items/${item._id}`)
+						.send(updateData);
+				})
+				.then(res => {
+					expect(res).to.have.status(204);
 
-	// 				return Item.findById(updateData._id)
-	// 			})
-	// 			.then(_item => {
-	// 				console(_item);
-
-	// 			});
-	// 	});
-	// });
-
+					return Item.findById(updateData._id)
+				})
+				.then(_item => {
+					// expect(_item._id).to.be.equal(updateData._id);
+					expect(_item.name).to.be.equal(updateData.name);
+					expect(_item.description).to.be.equal(updateData.description);
+					expect(_item.qty).to.be.equal(updateData.qty);
+				});
+		});
+	});
 	describe('DELETE request', function() {
 
 		it('should remove item from database', function() {
