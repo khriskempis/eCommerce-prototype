@@ -5,7 +5,8 @@ const passport = require('passport');
 
 
 const { router: itemsRouter } = require('./items');
-// const { router: usersRouter } = require('./users');
+const { router: usersRouter } = require('./users');
+
 // const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise; 

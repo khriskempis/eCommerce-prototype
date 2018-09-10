@@ -4,8 +4,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose'); 
 
-const { app, runServer, closeServer } = require('../server');
-const { TEST_DATABASE_URL } = require('../config');  
+
+const { app, runServer, closeServer } = require('../server'); 
+const { TEST_DATABASE_URL } = require('../config');
+
 
 
 const expect = chai.expect;
