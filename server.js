@@ -6,6 +6,7 @@ const passport = require('passport');
 
 const { router: itemsRouter } = require('./items');
 const { router: usersRouter } = require('./users');
+
 // const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise; 
@@ -34,7 +35,7 @@ app.use(function(req, res, next) {
 // passport.use(jwtStrategy);
 
 app.use('/items', itemsRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 // app.use('/auth', authRouter);
 
 // const jwtAuth = passport.authenticate('jwt', { session: false });
@@ -43,22 +44,18 @@ app.use('*', (req, res) => {
 	return res.status(404).json({ message: "Not Found"});
 });
 
-
-app.listen(process.env.PORT || 8080, () => {
-	console.log(`Your app is listening on port 8080`)
-});
-
 let server;
 
 function runServer(databaseUrl, port = PORT) {
 
 	return new Promise((resolve, reject) => {
-		mongoose.connect(databaseUrl, err=> {
+		mongoose.connect(databaseUrl, { useNewUrlParser: true }, err => {
 			if (err) {
 				return reject(err);
 			}
 			server = app.listen(port, () => {
 				console.log(`Your app is listening on port ${port}`);
+				resolve(); 
 			})
 				.on('error', err => {
 					mongoose.disconnect();
@@ -70,12 +67,14 @@ function runServer(databaseUrl, port = PORT) {
 
 function closeServer() {
 	return mongoose.disconnect().then(() => {
-		console.log('Closing Server');
-		server.close(err => {
-			if (err) {
-				return reject(err); 
-			}
-			resolve();
+		return new Promise((resolve, reject) => {
+			console.log('Closing Server');
+			server.close(err => {
+				if (err) {
+					return reject(err); 
+				}
+				resolve();
+			});
 		});
 	});
 }
